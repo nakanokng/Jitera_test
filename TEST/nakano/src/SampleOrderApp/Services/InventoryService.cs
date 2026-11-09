@@ -1,3 +1,4 @@
+using SampleOrderApp.Config;
 using SampleOrderApp.Models;
 
 namespace SampleOrderApp.Services
@@ -31,8 +32,8 @@ namespace SampleOrderApp.Services
                 {
                     line.IsBackOrder = true;
                     order.Messages.Add(string.Format(
-                        "{0} は在庫不足のため取り寄せになります（引当可能数 {1}）",
-                        line.Product.Name, GetAvailable(line.Product)));
+                        "{0} は在庫不足のため {1} から取り寄せになります（引当可能数 {2}）",
+                        line.Product.Name, AppSettings.MainSupplierName, GetAvailable(line.Product)));
                 }
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using SampleOrderApp.Config;
 using SampleOrderApp.Data;
 using SampleOrderApp.Models;
 using SampleOrderApp.Services;
@@ -25,6 +26,7 @@ namespace SampleOrderApp.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Text += " [" + AppSettings.ProjectCode + "]";
             try
             {
                 var repo = new CsvRepository(Path.Combine(Application.StartupPath, "Data"));
@@ -33,7 +35,8 @@ namespace SampleOrderApp.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "マスタ読込エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message + Environment.NewLine + "システム管理担当（" + AppSettings.SystemAdminName + "）に連絡してください。",
+                    "マスタ読込エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

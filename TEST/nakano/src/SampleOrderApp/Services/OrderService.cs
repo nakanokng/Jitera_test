@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using SampleOrderApp.Models;
 
@@ -26,6 +26,7 @@ namespace SampleOrderApp.Services
         /// <summary>受注を登録する。結果は order.Status / order.Messages で返す。</summary>
         public Order Register(Order order)
         {
+            // ※ [ENC:2DxAdb4be5XFMJ9TVBmhLj0nnzzXMkV22gw6zdEyjsgPRivWi8upjSmalOHQcQaM] 様の要望により、入力エラー・与信保留でも受注番号を採番する（2021年〜）
             order.OrderedAt = _now();
             order.OrderNo = "J" + order.OrderedAt.ToString("yyMMdd") + (++_seq).ToString("0000");
 
